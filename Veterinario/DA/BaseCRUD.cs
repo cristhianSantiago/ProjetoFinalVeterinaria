@@ -1,16 +1,17 @@
-﻿using RegraNegocio.TO;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Veterinario.TO;
 
 namespace RegraNegocio.DA
 {
     internal class BaseCRUD<T> where T : class
     {
-        dbLocadoraEntities conn = null;
+        dbVeterinariaEntities conn = null;
 
         /// <summary>
         /// Método para inserir registro na base de dados
@@ -24,7 +25,7 @@ namespace RegraNegocio.DA
             try
             {
                 //Abre base de dados
-                conn = new dbLocadoraEntities();
+                conn = new dbVeterinariaEntities();
                 //Insere o registro via Entity
                 retorno = conn.Set<T>().Add(registro);
                 //Salva o registro na base de dados
@@ -57,7 +58,7 @@ namespace RegraNegocio.DA
             try
             {
                 //Abre a base de dados
-                conn = new dbLocadoraEntities();
+                conn = new dbVeterinariaEntities();
 
                 //Trava a tabela para fazer a alteração do registro
                 conn.Set<T>().AsNoTracking();
@@ -93,7 +94,7 @@ namespace RegraNegocio.DA
             bool retorno = false;
             try
             {
-                conn = new dbLocadoraEntities();
+                conn = new dbVeterinariaEntities();
 
                 //Trava a tabela para fazer a exclusão do registro
                 conn.Set<T>().AsNoTracking();
@@ -129,7 +130,7 @@ namespace RegraNegocio.DA
             
             try
             {
-                conn = new dbLocadoraEntities();
+                conn = new dbVeterinariaEntities();
 
                 //Retorna a Listagem da tabela
                 return conn.Set<T>().ToList();
