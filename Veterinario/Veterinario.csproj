@@ -50,6 +50,8 @@
     <Compile Include="BO\AnimalBO.cs" />
     <Compile Include="BO\ClienteBO.cs" />
     <Compile Include="BO\ConsultaBO.cs" />
+    <Compile Include="BO\RacaBO.cs" />
+    <Compile Include="BO\TipoBO.cs" />
     <Compile Include="DA\BaseCRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TO\Animal.cs">
