@@ -145,7 +145,7 @@ namespace Veterinario.BO
 
                 //Verifica se o registro existe na base de dados
                 //Utilizando LINQ para recuperar o registro
-                Cliente registro = Listar().Where(x => x.IdCliente == id).FirstOrDefault();
+                Animal registro = Listar().Where(x => x.IdAnimal == id).FirstOrDefault();
                 if (registro == null)
                 {
                     msgErro.AppendLine("O cliente informado não está na base de dados");
@@ -170,7 +170,8 @@ namespace Veterinario.BO
         /// Método para selecionar todos os registros da tabela
         /// </summary>
         /// <returns>List</returns>
-        public List<Cliente> Listar() {
+        public List<Animal> Listar()
+        {
             try
             {
                 da = new BaseCRUD<Animal>();
