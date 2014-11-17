@@ -46,8 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Biblioteca\Validacao.cs" />
+    <Compile Include="BO\AnimalBO.cs" />
     <Compile Include="BO\ClienteBO.cs" />
-    <Compile Include="BO\TelefoneBO.cs" />
     <Compile Include="DA\BaseCRUD.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TO\Animal.cs">

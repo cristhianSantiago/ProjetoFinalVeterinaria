@@ -1,13 +1,13 @@
-﻿using RegraNegocio.DA;
-using RegraNegocio.TO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using RegraNegocio.Biblioteca;
+using Veterinario.Biblioteca;
+using Veterinario.DA;
+using Veterinario.TO;
 
-namespace RegraNegocio.BO
+namespace Veterinario.BO
 {
     public class ClienteBO
     {

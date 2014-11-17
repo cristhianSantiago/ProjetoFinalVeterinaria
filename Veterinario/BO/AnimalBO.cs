@@ -1,59 +1,56 @@
-﻿using RegraNegocio.DA;
-using RegraNegocio.TO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Veterinario.DA;
+using Veterinario.TO;
 
-namespace RegraNegocio.BO
+namespace Veterinario.BO
 {
-    public class TelefoneBO
+    class AnimalBO
     {
-        //Cria o objeto da BaseCRUD
-        BaseCRUD<Telefone> da = null;
+         //Cria o objeto da BaseCRUD
+        BaseCRUD<Animal> da = null;
 
         /// <summary>
         /// Método para inserir registro na base de dados
         /// </summary>
-        /// <param name="registro">Telefone</param>
-        /// <returns>Telefone</returns>
-        public Telefone Inserir(Telefone registro)
+        /// <param name="registro">Cliente</param>
+        /// <returns>Cliente</returns>
+        public Animal Inserir(Animal registro)
         {
             try
             {
                 //Instância objeto do CRUD
-                da = new BaseCRUD<Telefone>();
+                da = new BaseCRUD<Animal>();
 
                 //Inicia o StringBuilder para gerar o texto com mensagens de erro
                 StringBuilder msgErro = new StringBuilder();
 
-                //Verifica se o registro da chave estrangeira existe na base de dados
-                //Utilizando LINQ para recuperar o registro
-                Cliente c = new ClienteBO().Listar().Where(x => x.IdCliente == registro.IdClienteFK).FirstOrDefault();
-                
-                //var l = new ClienteBO().Listar();
-
-                //Cliente c = (from cl in l
-                //             where cl.IdCliente == registro.IdClienteFK
-                //             select cl).FirstOrDefault();
-
-                if (c == null)
-                {
-                    msgErro.AppendLine("O Cliente informado não está na base de dados");
-                }
-
                 //Verifica se o registro está Nulo ou Vazio
                 //Verifica se a quantidade de caracteres é maior que possível
-                if (string.IsNullOrEmpty(registro.NumeroTelefone))
+                if (string.IsNullOrEmpty(registro.NomeAnimal))
                 {
-                    msgErro.AppendLine("Número de Telefone é obrigatório");
+                    msgErro.AppendLine("Nome do animal é obrigatório");
                 }
-                else if (registro.NumeroTelefone.Length > 20)
+                else if (registro.NomeAnimal.Length > 150)
                 {
-                    msgErro.AppendLine("Número de Telefone só pode conter 20 caracteres");
+                    msgErro.AppendLine("Nome só pode conter 150 caracteres");
                 }
-                
+
+               
+                //Verifica se a Data de nascimento é Nula ou vazia
+                //Verifica se a Data de Nascimento é maior que data atual
+                if (string.IsNullOrEmpty(registro.DataNascimento.ToString()))
+                {
+                    msgErro.AppendLine("Data de Nascimento é obrigatório");
+                }
+                else if (registro.DataNascimento > DateTime.Now)
+                {
+                    msgErro.AppendLine("Data de Nascimento é maior que a data atual");
+                }
+
                 //Retorna erro quando existir no StringBuilder
                 if (msgErro.Length > 0)
                 {
@@ -72,43 +69,48 @@ namespace RegraNegocio.BO
         /// <summary>
         /// Atualiza registro na base de dados
         /// </summary>
-        /// <param name="registro">Telefone</param>
-        /// <returns>Telefone</returns>
-        public Telefone Atualizar(Telefone registro)
+        /// <param name="registro">Animal</param>
+        /// <returns>Animal</returns>
+        public Animal Atualizar(Animal registro)
         {
             try
             {
                 //Instância objeto do CRUD
-                da = new BaseCRUD<Telefone>();
+                da = new BaseCRUD<Animal>();
 
                 //Inicia o StringBuilder para gerar o texto com mensagens de erro
                 StringBuilder msgErro = new StringBuilder();
 
-                //Verifica se o registro existe na base de dados
+                //Verifica se o Cliente existe na base de dados
                 //Utilizando LINQ para recuperar o registro
-                Telefone t = Listar().Where(x => x.IdTelefone == registro.IdTelefone).FirstOrDefault();
-                if (t == null)
+                Animal a = Listar().Where(x => x.IdAnimal == registro.IdAnimal).FirstOrDefault();
+                if (a == null)
                 {
-                    msgErro.AppendLine("O Telefone informado não está na base de dados");
+                    msgErro.AppendLine("O cliente informado não está na base de dados");
                 }
 
-                //Verifica se o registro da chave estrangeira existe na base de dados
-                //Utilizando LINQ para recuperar o registro
-                Cliente c = new ClienteBO().Listar().Where(x => x.IdCliente == registro.IdClienteFK).FirstOrDefault();
-                if (c == null)
-                {
-                    msgErro.AppendLine("O Cliente informado não está na base de dados");
-                }
-
-                //Verifica se o registro está Nulo ou Vazio
+                //Verifica se o Nome do Usuário está Nulo ou Vazio
                 //Verifica se a quantidade de caracteres é maior que possível
-                if (string.IsNullOrEmpty(registro.NumeroTelefone))
+                if (string.IsNullOrEmpty(registro.NomeAnimal))
                 {
-                    msgErro.AppendLine("Número de Telefone é obrigatório");
+                    msgErro.AppendLine("Nome é obrigatório");
                 }
-                else if (registro.NumeroTelefone.Length > 20)
+                else if (registro.NomeAnimal.Length > 150)
                 {
-                    msgErro.AppendLine("Número de Telefone só pode conter 20 caracteres");
+                    msgErro.AppendLine("Nome só pode conter 150 caracteres");
+                }
+
+                
+
+                //Verifica se a Data de nascimento é Nula ou vazia
+                //Verifica se a Data de Nascimento é maior que data atual
+                if (string.IsNullOrEmpty(registro.DataNascimento.ToString()))
+                {
+                    msgErro.AppendLine("Data de Nascimento é obrigatório");
+                }
+                else if (registro.DataNascimento > DateTime.Now)
+                {
+                    msgErro.AppendLine("Data de Nascimento é maior que a data atual");
                 }
 
                 //Retorna erro quando existir no StringBuilder
@@ -136,19 +138,19 @@ namespace RegraNegocio.BO
             try
             {
                 //Instância objeto do CRUD
-                da = new BaseCRUD<Telefone>();
+                da = new BaseCRUD<Animal>();
 
                 //Inicia o StringBuilder para gerar o texto com mensagens de erro
                 StringBuilder msgErro = new StringBuilder();
 
-                //Verifica se o Telefone existe na base de dados
+                //Verifica se o registro existe na base de dados
                 //Utilizando LINQ para recuperar o registro
-                Telefone registro = Listar().Where(x => x.IdTelefone == id).FirstOrDefault();
+                Cliente registro = Listar().Where(x => x.IdCliente == id).FirstOrDefault();
                 if (registro == null)
                 {
-                    msgErro.AppendLine("O Telefone informado não está na base de dados");
+                    msgErro.AppendLine("O cliente informado não está na base de dados");
                 }
-
+                
                 //Retorna erro quando existir no StringBuilder
                 if (msgErro.Length > 0)
                 {
@@ -168,11 +170,10 @@ namespace RegraNegocio.BO
         /// Método para selecionar todos os registros da tabela
         /// </summary>
         /// <returns>List</returns>
-        public List<Telefone> Listar()
-        {
+        public List<Cliente> Listar() {
             try
             {
-                da = new BaseCRUD<Telefone>();
+                da = new BaseCRUD<Animal>();
 
                 return da.Listar();
             }
@@ -182,4 +183,5 @@ namespace RegraNegocio.BO
             }
         }
     }
-}
+    }
+

@@ -5,9 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Veterinario.TO;
 
-namespace RegraNegocio.DA
+namespace Veterinario.DA
 {
     internal class BaseCRUD<T> where T : class
     {
