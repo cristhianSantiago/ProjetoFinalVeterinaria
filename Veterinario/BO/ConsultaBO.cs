@@ -8,48 +8,44 @@ using Veterinario.TO;
 
 namespace Veterinario.BO
 {
-    class AnimalBO
+    class ConsultaBO
     {
-         //Cria o objeto da BaseCRUD
-        BaseCRUD<Animal> da = null;
+        //Cria o objeto da BaseCRUD
+        BaseCRUD<Consulta> da = null;
 
         /// <summary>
         /// Método para inserir registro na base de dados
         /// </summary>
-        /// <param name="registro">Cliente</param>
-        /// <returns>Cliente</returns>
-        public Animal Inserir(Animal registro)
+        /// <param name="registro">Locacao</param>
+        /// <returns>Locacao</returns>
+        public Consulta Inserir(Consulta registro)
         {
             try
             {
                 //Instância objeto do CRUD
-                da = new BaseCRUD<Animal>();
+                da = new BaseCRUD<Consulta>();
 
                 //Inicia o StringBuilder para gerar o texto com mensagens de erro
                 StringBuilder msgErro = new StringBuilder();
 
-                //Verifica se o registro está Nulo ou Vazio
-                //Verifica se a quantidade de caracteres é maior que possível
-                if (string.IsNullOrEmpty(registro.NomeAnimal))
+                //Verifica se o registro da chave estrangeira existe na base de dados
+                //Utilizando LINQ para recuperar o registro
+                Cliente c = new ClienteBO().Listar().Where(x => x.IdCliente == registro.IdAnimalFK).FirstOrDefault();
+                if (c == null)
                 {
-                    msgErro.AppendLine("Nome do animal é obrigatório");
-                }
-                else if (registro.NomeAnimal.Length > 150)
-                {
-                    msgErro.AppendLine("Nome do animal só pode conter 150 caracteres");
+                    msgErro.AppendLine("O Cliente informado não está na base de dados");
                 }
 
-               
-                //Verifica se a Data de nascimento é Nula ou vazia
-                //Verifica se a Data de Nascimento é maior que data atual
-                if (string.IsNullOrEmpty(registro.DataNascimento.ToString()))
+                //Verifica se o registro da chave estrangeira existe na base de dados
+                //Utilizando LINQ para recuperar o registro
+                Animal a = new AnimalBO().Listar().Where(x => x.IdAnimal == registro.IdAnimalFK).FirstOrDefault();
+                if (a == null)
                 {
-                    msgErro.AppendLine("Data de Nascimento é obrigatório");
+                    msgErro.AppendLine("O Filme informado não está na base de dados");
                 }
-                else if (registro.DataNascimento > DateTime.Now)
-                {
-                    msgErro.AppendLine("Data de Nascimento é maior que a data atual");
-                }
+
+                //Coloca a data de entrega do filme 5 dias após a data de locação
+                registro.DataHora = registro.DataHora;
 
                 //Retorna erro quando existir no StringBuilder
                 if (msgErro.Length > 0)
@@ -69,49 +65,44 @@ namespace Veterinario.BO
         /// <summary>
         /// Atualiza registro na base de dados
         /// </summary>
-        /// <param name="registro">Animal</param>
-        /// <returns>Animal</returns>
-        public Animal Atualizar(Animal registro)
+        /// <param name="registro">Locacao</param>
+        /// <returns>Locacao</returns>
+        public Consulta Atualizar(Consulta registro)
         {
             try
             {
                 //Instância objeto do CRUD
-                da = new BaseCRUD<Animal>();
+                da = new BaseCRUD<Consulta>();
 
                 //Inicia o StringBuilder para gerar o texto com mensagens de erro
                 StringBuilder msgErro = new StringBuilder();
 
-                //Verifica se o Cliente existe na base de dados
+                //Verifica se o registro existe na base de dados
                 //Utilizando LINQ para recuperar o registro
-                Animal a = Listar().Where(x => x.IdAnimal == registro.IdAnimal).FirstOrDefault();
-                if (a == null)
+                Consulta t = Listar().Where(x => x.IdConsulta == registro.IdConsulta).FirstOrDefault();
+                if (t == null)
                 {
-                    msgErro.AppendLine("O animal informado não está na base de dados");
+                    msgErro.AppendLine("O Locacao informado não está na base de dados");
                 }
 
-                //Verifica se o Nome do Usuário está Nulo ou Vazio
-                //Verifica se a quantidade de caracteres é maior que possível
-                if (string.IsNullOrEmpty(registro.NomeAnimal))
+                //Verifica se o registro da chave estrangeira existe na base de dados
+                //Utilizando LINQ para recuperar o registro
+                Cliente c = new ClienteBO().Listar().Where(x => x.IdCliente == registro.IdAnimalFK).FirstOrDefault();
+                if (c == null)
                 {
-                    msgErro.AppendLine("Nome do animal é obrigatório");
-                }
-                else if (registro.NomeAnimal.Length > 150)
-                {
-                    msgErro.AppendLine("Nome do animal só pode conter 150 caracteres");
+                    msgErro.AppendLine("O Cliente informado não está na base de dados");
                 }
 
-                
+                //Verifica se o registro da chave estrangeira existe na base de dados
+                //Utilizando LINQ para recuperar o registro
+                Animal f = new AnimalBO().Listar().Where(x => x.IdAnimal == registro.IdAnimalFK).FirstOrDefault();
+                if (f == null)
+                {
+                    msgErro.AppendLine("O Filme informado não está na base de dados");
+                }
 
-                //Verifica se a Data de nascimento é Nula ou vazia
-                //Verifica se a Data de Nascimento é maior que data atual
-                if (string.IsNullOrEmpty(registro.DataNascimento.ToString()))
-                {
-                    msgErro.AppendLine("Data de Nascimento é obrigatório");
-                }
-                else if (registro.DataNascimento > DateTime.Now)
-                {
-                    msgErro.AppendLine("Data de Nascimento é maior que a data atual");
-                }
+                //Coloca a data de entrega do filme 5 dias após a data de locação
+                registro.DataHora = registro.DataHora.AddDays(5);
 
                 //Retorna erro quando existir no StringBuilder
                 if (msgErro.Length > 0)
@@ -138,19 +129,19 @@ namespace Veterinario.BO
             try
             {
                 //Instância objeto do CRUD
-                da = new BaseCRUD<Animal>();
+                da = new BaseCRUD<Consulta>();
 
                 //Inicia o StringBuilder para gerar o texto com mensagens de erro
                 StringBuilder msgErro = new StringBuilder();
 
-                //Verifica se o registro existe na base de dados
+                //Verifica se o Locacao existe na base de dados
                 //Utilizando LINQ para recuperar o registro
-                Animal registro = Listar().Where(x => x.IdAnimal == id).FirstOrDefault();
+                Consulta registro = Listar().Where(x => x.IdConsulta == id).FirstOrDefault();
                 if (registro == null)
                 {
-                    msgErro.AppendLine("O animal informado não está na base de dados");
+                    msgErro.AppendLine("O Locacao informado não está na base de dados");
                 }
-                
+
                 //Retorna erro quando existir no StringBuilder
                 if (msgErro.Length > 0)
                 {
@@ -170,11 +161,11 @@ namespace Veterinario.BO
         /// Método para selecionar todos os registros da tabela
         /// </summary>
         /// <returns>List</returns>
-        public List<Animal> Listar()
+        public List<Consulta> Listar()
         {
             try
             {
-                da = new BaseCRUD<Animal>();
+                da = new BaseCRUD<Consulta>();
 
                 return da.Listar();
             }
@@ -184,5 +175,4 @@ namespace Veterinario.BO
             }
         }
     }
-    }
-
+}
