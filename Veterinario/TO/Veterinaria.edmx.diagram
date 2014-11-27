@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="49c696928fc441e6a7b722c2acb7ac8f" Name="Diagram1" ZoomLevel="98">
+        <EntityTypeShape EntityType="dbVeterinariaModel.Animal" Width="1.5" PointX="3" PointY="3" />
+        <EntityTypeShape EntityType="dbVeterinariaModel.Cliente" Width="1.5" PointX="0.75" PointY="3.125" />
+        <EntityTypeShape EntityType="dbVeterinariaModel.Consulta" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="dbVeterinariaModel.Raca" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="dbVeterinariaModel.Telefone" Width="1.5" PointX="3" PointY="8.125" />
+        <EntityTypeShape EntityType="dbVeterinariaModel.Tipo" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="dbVeterinariaModel.Vet" Width="1.5" PointX="3" PointY="11" />
+        <AssociationConnector Association="dbVeterinariaModel.FK__Animal__IdClient__1B0907CE" />
+        <AssociationConnector Association="dbVeterinariaModel.FK__Animal__IdRacaFK__1CF15040" />
+        <AssociationConnector Association="dbVeterinariaModel.FK__Animal__IdTipoFK__1BFD2C07" />
+        <AssociationConnector Association="dbVeterinariaModel.FK__Consulta__IdAnim__276EDEB3" />
+        <AssociationConnector Association="dbVeterinariaModel.FK__Telefone__IdClie__145C0A3F" />
+        <AssociationConnector Association="dbVeterinariaModel.FK__Consulta__IdVete__267ABA7A" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

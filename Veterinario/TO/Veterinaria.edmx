@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="dbVeterinariaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="IdAnimal" />
+          </Key>
+          <Property Name="IdAnimal" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClienteFK" Type="int" Nullable="false" />
+          <Property Name="IdTipoFK" Type="int" Nullable="false" />
+          <Property Name="IdRacaFK" Type="int" Nullable="false" />
+          <Property Name="NomeAnimal" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NascimentoAnimal" Type="date" />
+          <Property Name="Peso" Type="numeric" Precision="5" Scale="2" />
+          <Property Name="Altura" Type="numeric" Precision="2" Scale="2" />
+          <Property Name="Alergico" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CPF" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="RG" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DataNascimento" Type="date" />
+          <Property Name="Endereco" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="TelefoneResidencial" Type="varchar" MaxLength="20" />
+          <Property Name="TelefoneCelular" Type="varchar" MaxLength="20" />
+          <Property Name="Whatsapp" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Consulta">
+          <Key>
+            <PropertyRef Name="IdConsulta" />
+          </Key>
+          <Property Name="IdConsulta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdVeterinarioFK" Type="int" Nullable="false" />
+          <Property Name="IdAnimalFK" Type="int" Nullable="false" />
+          <Property Name="DataHora" Type="datetime" Nullable="false" />
+          <Property Name="Valor" Type="money" Nullable="false" />
+          <Property Name="Diagnostico" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Raca">
+          <Key>
+            <PropertyRef Name="IdRaca" />
+          </Key>
+          <Property Name="IdRaca" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RacaAnimal" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Telefone">
+          <Key>
+            <PropertyRef Name="IdTelefone" />
+          </Key>
+          <Property Name="IdTelefone" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdClienteFK" Type="int" Nullable="false" />
+          <Property Name="NumeroTelefone" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="IdTipo" />
+          </Key>
+          <Property Name="IdTipo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TipoAnimal" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Vet">
+          <Key>
+            <PropertyRef Name="IdVeterinario" />
+          </Key>
+          <Property Name="IdVeterinario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeVeterinario" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="CPF" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="RG" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DataNascimento" Type="date" Nullable="false" />
+          <Property Name="Endereco" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="Whatsapp" Type="varchar" MaxLength="20" />
+          <Property Name="CRVM" Type="varchar" MaxLength="5" />
+          <Property Name="CelularVeterinario" Type="varchar" MaxLength="16" />
+          <Property Name="TelefoneVeterinario" Type="varchar" MaxLength="20" />
+          <Property Name="Especialidade" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__Animal__IdClient__1B0907CE">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="IdClienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__IdRacaFK__1CF15040">
+          <End Role="Raca" Type="Self.Raca" Multiplicity="1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raca">
+              <PropertyRef Name="IdRaca" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="IdRacaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__IdTipoFK__1BFD2C07">
+          <End Role="Tipo" Type="Self.Tipo" Multiplicity="1" />
+          <End Role="Animal" Type="Self.Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="IdTipo" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="IdTipoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consulta__IdAnim__276EDEB3">
+          <End Role="Animal" Type="Self.Animal" Multiplicity="1" />
+          <End Role="Consulta" Type="Self.Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="IdAnimal" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="IdAnimalFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consulta__IdVete__267ABA7A">
+          <End Role="Vet" Type="Self.Vet" Multiplicity="1" />
+          <End Role="Consulta" Type="Self.Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vet">
+              <PropertyRef Name="IdVeterinario" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="IdVeterinarioFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Telefone__IdClie__145C0A3F">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="1" />
+          <End Role="Telefone" Type="Self.Telefone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Telefone">
+              <PropertyRef Name="IdClienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="dbVeterinariaModelStoreContainer">
+          <EntitySet Name="Animal" EntityType="Self.Animal" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consulta" EntityType="Self.Consulta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Raca" EntityType="Self.Raca" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Telefone" EntityType="Self.Telefone" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tipo" EntityType="Self.Tipo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Vet" EntityType="Self.Vet" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Animal__IdClient__1B0907CE" Association="Self.FK__Animal__IdClient__1B0907CE">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__IdRacaFK__1CF15040" Association="Self.FK__Animal__IdRacaFK__1CF15040">
+            <End Role="Raca" EntitySet="Raca" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__IdTipoFK__1BFD2C07" Association="Self.FK__Animal__IdTipoFK__1BFD2C07">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consulta__IdAnim__276EDEB3" Association="Self.FK__Consulta__IdAnim__276EDEB3">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Consulta" EntitySet="Consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consulta__IdVete__267ABA7A" Association="Self.FK__Consulta__IdVete__267ABA7A">
+            <End Role="Vet" EntitySet="Vet" />
+            <End Role="Consulta" EntitySet="Consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Telefone__IdClie__145C0A3F" Association="Self.FK__Telefone__IdClie__145C0A3F">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Telefone" EntitySet="Telefone" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="dbVeterinariaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="dbVeterinariaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Animal" EntityType="dbVeterinariaModel.Animal" />
+          <EntitySet Name="Cliente" EntityType="dbVeterinariaModel.Cliente" />
+          <EntitySet Name="Consulta" EntityType="dbVeterinariaModel.Consulta" />
+          <EntitySet Name="Raca" EntityType="dbVeterinariaModel.Raca" />
+          <EntitySet Name="Telefone" EntityType="dbVeterinariaModel.Telefone" />
+          <EntitySet Name="Tipo" EntityType="dbVeterinariaModel.Tipo" />
+          <EntitySet Name="Vet" EntityType="dbVeterinariaModel.Vet" />
+          <AssociationSet Name="FK__Animal__IdClient__1B0907CE" Association="dbVeterinariaModel.FK__Animal__IdClient__1B0907CE">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__IdRacaFK__1CF15040" Association="dbVeterinariaModel.FK__Animal__IdRacaFK__1CF15040">
+            <End Role="Raca" EntitySet="Raca" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Animal__IdTipoFK__1BFD2C07" Association="dbVeterinariaModel.FK__Animal__IdTipoFK__1BFD2C07">
+            <End Role="Tipo" EntitySet="Tipo" />
+            <End Role="Animal" EntitySet="Animal" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consulta__IdAnim__276EDEB3" Association="dbVeterinariaModel.FK__Consulta__IdAnim__276EDEB3">
+            <End Role="Animal" EntitySet="Animal" />
+            <End Role="Consulta" EntitySet="Consulta" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Telefone__IdClie__145C0A3F" Association="dbVeterinariaModel.FK__Telefone__IdClie__145C0A3F">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Telefone" EntitySet="Telefone" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Consulta__IdVete__267ABA7A" Association="dbVeterinariaModel.FK__Consulta__IdVete__267ABA7A">
+            <End Role="Vet" EntitySet="Vet" />
+            <End Role="Consulta" EntitySet="Consulta" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Animal">
+          <Key>
+            <PropertyRef Name="IdAnimal" />
+          </Key>
+          <Property Name="IdAnimal" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClienteFK" Type="Int32" Nullable="false" />
+          <Property Name="IdTipoFK" Type="Int32" Nullable="false" />
+          <Property Name="IdRacaFK" Type="Int32" Nullable="false" />
+          <Property Name="NomeAnimal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NascimentoAnimal" Type="DateTime" Precision="0" />
+          <Property Name="Peso" Type="Decimal" Precision="5" Scale="2" />
+          <Property Name="Altura" Type="Decimal" Precision="2" Scale="2" />
+          <Property Name="Alergico" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="dbVeterinariaModel.FK__Animal__IdClient__1B0907CE" FromRole="Animal" ToRole="Cliente" />
+          <NavigationProperty Name="Raca" Relationship="dbVeterinariaModel.FK__Animal__IdRacaFK__1CF15040" FromRole="Animal" ToRole="Raca" />
+          <NavigationProperty Name="Tipo" Relationship="dbVeterinariaModel.FK__Animal__IdTipoFK__1BFD2C07" FromRole="Animal" ToRole="Tipo" />
+          <NavigationProperty Name="Consulta" Relationship="dbVeterinariaModel.FK__Consulta__IdAnim__276EDEB3" FromRole="Animal" ToRole="Consulta" />
+        </EntityType>
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CPF" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="RG" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DataNascimento" Type="DateTime" Precision="0" />
+          <Property Name="Endereco" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="TelefoneResidencial" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="TelefoneCelular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Whatsapp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Animal" Relationship="dbVeterinariaModel.FK__Animal__IdClient__1B0907CE" FromRole="Cliente" ToRole="Animal" />
+          <NavigationProperty Name="Telefone" Relationship="dbVeterinariaModel.FK__Telefone__IdClie__145C0A3F" FromRole="Cliente" ToRole="Telefone" />
+        </EntityType>
+        <EntityType Name="Consulta">
+          <Key>
+            <PropertyRef Name="IdConsulta" />
+          </Key>
+          <Property Name="IdConsulta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdVeterinarioFK" Type="Int32" Nullable="false" />
+          <Property Name="IdAnimalFK" Type="Int32" Nullable="false" />
+          <Property Name="DataHora" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Valor" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="Diagnostico" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Animal" Relationship="dbVeterinariaModel.FK__Consulta__IdAnim__276EDEB3" FromRole="Consulta" ToRole="Animal" />
+          <NavigationProperty Name="Vet" Relationship="dbVeterinariaModel.FK__Consulta__IdVete__267ABA7A" FromRole="Consulta" ToRole="Vet" />
+        </EntityType>
+        <EntityType Name="Raca">
+          <Key>
+            <PropertyRef Name="IdRaca" />
+          </Key>
+          <Property Name="IdRaca" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RacaAnimal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Animal" Relationship="dbVeterinariaModel.FK__Animal__IdRacaFK__1CF15040" FromRole="Raca" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="Telefone">
+          <Key>
+            <PropertyRef Name="IdTelefone" />
+          </Key>
+          <Property Name="IdTelefone" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdClienteFK" Type="Int32" Nullable="false" />
+          <Property Name="NumeroTelefone" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Cliente" Relationship="dbVeterinariaModel.FK__Telefone__IdClie__145C0A3F" FromRole="Telefone" ToRole="Cliente" />
+        </EntityType>
+        <EntityType Name="Tipo">
+          <Key>
+            <PropertyRef Name="IdTipo" />
+          </Key>
+          <Property Name="IdTipo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TipoAnimal" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Animal" Relationship="dbVeterinariaModel.FK__Animal__IdTipoFK__1BFD2C07" FromRole="Tipo" ToRole="Animal" />
+        </EntityType>
+        <EntityType Name="Vet">
+          <Key>
+            <PropertyRef Name="IdVeterinario" />
+          </Key>
+          <Property Name="IdVeterinario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeVeterinario" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="CPF" Type="String" Nullable="false" MaxLength="14" FixedLength="false" Unicode="false" />
+          <Property Name="RG" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="DataNascimento" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Endereco" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Whatsapp" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="CRVM" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="CelularVeterinario" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="TelefoneVeterinario" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Especialidade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Consulta" Relationship="dbVeterinariaModel.FK__Consulta__IdVete__267ABA7A" FromRole="Vet" ToRole="Consulta" />
+        </EntityType>
+        <Association Name="FK__Animal__IdClient__1B0907CE">
+          <End Type="dbVeterinariaModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="dbVeterinariaModel.Animal" Role="Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="IdClienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__IdRacaFK__1CF15040">
+          <End Type="dbVeterinariaModel.Raca" Role="Raca" Multiplicity="1" />
+          <End Type="dbVeterinariaModel.Animal" Role="Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Raca">
+              <PropertyRef Name="IdRaca" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="IdRacaFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Animal__IdTipoFK__1BFD2C07">
+          <End Type="dbVeterinariaModel.Tipo" Role="Tipo" Multiplicity="1" />
+          <End Type="dbVeterinariaModel.Animal" Role="Animal" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tipo">
+              <PropertyRef Name="IdTipo" />
+            </Principal>
+            <Dependent Role="Animal">
+              <PropertyRef Name="IdTipoFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consulta__IdAnim__276EDEB3">
+          <End Type="dbVeterinariaModel.Animal" Role="Animal" Multiplicity="1" />
+          <End Type="dbVeterinariaModel.Consulta" Role="Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Animal">
+              <PropertyRef Name="IdAnimal" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="IdAnimalFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Telefone__IdClie__145C0A3F">
+          <End Type="dbVeterinariaModel.Cliente" Role="Cliente" Multiplicity="1" />
+          <End Type="dbVeterinariaModel.Telefone" Role="Telefone" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="Telefone">
+              <PropertyRef Name="IdClienteFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Consulta__IdVete__267ABA7A">
+          <End Type="dbVeterinariaModel.Vet" Role="Vet" Multiplicity="1" />
+          <End Type="dbVeterinariaModel.Consulta" Role="Consulta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vet">
+              <PropertyRef Name="IdVeterinario" />
+            </Principal>
+            <Dependent Role="Consulta">
+              <PropertyRef Name="IdVeterinarioFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="dbVeterinariaModelStoreContainer" CdmEntityContainer="dbVeterinariaEntities">
+          <EntitySetMapping Name="Animal">
+            <EntityTypeMapping TypeName="dbVeterinariaModel.Animal">
+              <MappingFragment StoreEntitySet="Animal">
+                <ScalarProperty Name="Alergico" ColumnName="Alergico" />
+                <ScalarProperty Name="Altura" ColumnName="Altura" />
+                <ScalarProperty Name="Peso" ColumnName="Peso" />
+                <ScalarProperty Name="NascimentoAnimal" ColumnName="NascimentoAnimal" />
+                <ScalarProperty Name="NomeAnimal" ColumnName="NomeAnimal" />
+                <ScalarProperty Name="IdRacaFK" ColumnName="IdRacaFK" />
+                <ScalarProperty Name="IdTipoFK" ColumnName="IdTipoFK" />
+                <ScalarProperty Name="IdClienteFK" ColumnName="IdClienteFK" />
+                <ScalarProperty Name="IdAnimal" ColumnName="IdAnimal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cliente">
+            <EntityTypeMapping TypeName="dbVeterinariaModel.Cliente">
+              <MappingFragment StoreEntitySet="Cliente">
+                <ScalarProperty Name="Whatsapp" ColumnName="Whatsapp" />
+                <ScalarProperty Name="TelefoneCelular" ColumnName="TelefoneCelular" />
+                <ScalarProperty Name="TelefoneResidencial" ColumnName="TelefoneResidencial" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+                <ScalarProperty Name="RG" ColumnName="RG" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consulta">
+            <EntityTypeMapping TypeName="dbVeterinariaModel.Consulta">
+              <MappingFragment StoreEntitySet="Consulta">
+                <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+                <ScalarProperty Name="Valor" ColumnName="Valor" />
+                <ScalarProperty Name="DataHora" ColumnName="DataHora" />
+                <ScalarProperty Name="IdAnimalFK" ColumnName="IdAnimalFK" />
+                <ScalarProperty Name="IdVeterinarioFK" ColumnName="IdVeterinarioFK" />
+                <ScalarProperty Name="IdConsulta" ColumnName="IdConsulta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Raca">
+            <EntityTypeMapping TypeName="dbVeterinariaModel.Raca">
+              <MappingFragment StoreEntitySet="Raca">
+                <ScalarProperty Name="RacaAnimal" ColumnName="RacaAnimal" />
+                <ScalarProperty Name="IdRaca" ColumnName="IdRaca" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Telefone">
+            <EntityTypeMapping TypeName="dbVeterinariaModel.Telefone">
+              <MappingFragment StoreEntitySet="Telefone">
+                <ScalarProperty Name="NumeroTelefone" ColumnName="NumeroTelefone" />
+                <ScalarProperty Name="IdClienteFK" ColumnName="IdClienteFK" />
+                <ScalarProperty Name="IdTelefone" ColumnName="IdTelefone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tipo">
+            <EntityTypeMapping TypeName="dbVeterinariaModel.Tipo">
+              <MappingFragment StoreEntitySet="Tipo">
+                <ScalarProperty Name="TipoAnimal" ColumnName="TipoAnimal" />
+                <ScalarProperty Name="IdTipo" ColumnName="IdTipo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vet">
+            <EntityTypeMapping TypeName="dbVeterinariaModel.Vet">
+              <MappingFragment StoreEntitySet="Vet">
+                <ScalarProperty Name="Especialidade" ColumnName="Especialidade" />
+                <ScalarProperty Name="TelefoneVeterinario" ColumnName="TelefoneVeterinario" />
+                <ScalarProperty Name="CelularVeterinario" ColumnName="CelularVeterinario" />
+                <ScalarProperty Name="CRVM" ColumnName="CRVM" />
+                <ScalarProperty Name="Whatsapp" ColumnName="Whatsapp" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+                <ScalarProperty Name="RG" ColumnName="RG" />
+                <ScalarProperty Name="CPF" ColumnName="CPF" />
+                <ScalarProperty Name="NomeVeterinario" ColumnName="NomeVeterinario" />
+                <ScalarProperty Name="IdVeterinario" ColumnName="IdVeterinario" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

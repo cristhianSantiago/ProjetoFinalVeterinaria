@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Sivet.master.cs" Inherits="Interface.Sivet" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="Content/css/Site.css" />
+    <link rel="stylesheet" type="text/css" href="Content/css/bootstrap.css" />
+    
+</head>
+<body>
+    <form id="form1" runat="server">
+        
+  <div class="container body-content" style="width: 1020px;">
+   
+       <nav class="navbar navbar-default" role="navigation" style="margin-left: 16px; background-color: #ffffff;  box-shadow: 1px 1px 4px #eee;">
+           <p style="padding-left: 18px;"><img src="Content/imagem/logo.png" /></p>
+       </nav>
+    <div class="col-sm-3 col-md-2 affix-sidebar">
+			<div class="sidebar-nav">
+            <div class="well" style="width:130px; padding: 8px 0px; background-color: #ffffff; margin: 0px;  box-shadow: 1px 1px 4px #eee; -webkit-border-radius: 8px 8px 5px 5px;">
+        		<ul class="nav nav-list"> 
+        		  <li><img src="Content/imagem/menu.png" style="margin-top: -8px; text-align: center;"/></li>        
+        		  <li><a href="default.aspx" style=" text-align: center;"><img src="Content/imagem/home.png" style="padding-bottom: 3px;"/><br />HOME</a></li>
+        		  <li><a href="Clientes.aspx" style=" text-align: center;"><img src="Content/imagem/clientes.png" style="padding-bottom: 3px;"/><br />CLIENTES</a></li>
+                  <li><a href="#" style=" text-align: center;"><img src="Content/imagem/consultas.png" style="padding-bottom: 3px;"/><br />CONSULTAS</a></li>
+        		  <li><a href="#" style=" text-align: center;"><img src="Content/imagem/pets.png" style="padding-bottom: 3px;"/><br />PETS</a></li>
+        		  <li><a href="#" style=" text-align: center;"><img src="Content/imagem/veterinarios.png" style="padding-bottom: 3px;"/><br />VETERINÁRIOS</a></li>        		  
+        		</ul>
+        	</div>
+        </div>
+  </div>
+	        
+            <div class="col-sm-9 col-md-10" style="border-radius: 10px; border: solid 1px #eee; box-shadow: 1px 1px 4px #eee;">
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+            </asp:ContentPlaceHolder>
+                 
+            </div>
+        
+
+        <div class="col-sm-12 col-md-12"">
+    
+        <hr />
+        <footer>
+            <p>&copy;SIVET - Todos os direitos reservados</p>
+        </footer>
+    </div>
+     </div>
+        
+      
+    </form>
+</body>
+</html>
+
+
+
+
+

@@ -1,0 +1,60 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.navbar-inverse {
+  background-color: #666;
+  border-color: #080808;
+}
+
+.botao {
+    padding: 5px 15px;
+    border-radius: 8px;
+    background-color: #FA6F57;
+    border-color: #EB503B;
+    border-style: solid;
+    border-width: 1px;
+    color: White;
+}
+
+.botao:hover {
+    border-radius: 8px;
+    background-color: #eb503b;
+    border-color: #EB503B;
+    border-style: solid;
+    border-width: 1px;
+    color: White;
+}
+
+.tabela{
+    border: solid 1px #c1bdc1;
+    width: 100%;
+    padding-left: 6px;
+    margin-bottom: 20px;
+}
+
+
+th{
+   padding: 10px 10px 0px 10px;
+   background-color: #a1d36e;
+   color: #fff;
+}
+
+label{
+    margin-right: 5px;
+}
